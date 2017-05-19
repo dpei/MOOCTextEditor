@@ -56,9 +56,13 @@ public class BasicDocument extends Document
 	{
 	    //TODO: Implement this method.  See the Module 2 support videos 
         // if you need help.
-        return 0;
+		String text = super.getText();
+		int count = 0;
+		if (text.charAt(text.length()-1) == '.'){
+        	count = 1;
+        }
+		return text.length() - text.replaceAll("[!?.]", "").length();
 	}
-	
 	/**
 	 * Get the total number of syllables in the document (the stored text). 
 	 * To count the number of syllables in a word, it uses the following rules:
