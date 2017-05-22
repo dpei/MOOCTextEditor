@@ -73,8 +73,40 @@ public abstract class Document {
 		// TODO: Implement this method so that you can call it from the 
 	    // getNumSyllables method in BasicDocument (module 2) and 
 	    // EfficientDocument (module 3).
-	    return 0;
+		/*int count = 0; 
+		if ( lone 'e' is at the end ){
+			if (the word has no other syllables.){
+				count = 1;
+			} else {
+				count = countVowel()-1;
+			}
+		} else {
+		*/
+			int count = countVowel(word);
+		//}
+		
+		
+	    return count;
 	}
+	
+	// Not sure why countVowel() should be implemented in the abstract class
+	protected int countVowel(String word){
+		int count = 0;
+		String vowel = "aoeiuy";
+		// store the state of vowel letter string
+		boolean newV = true;
+		for (int i = 0; i < word.length(); i++){
+			//Each contiguous sequence of one or more vowels is a syllable, 
+			if (newV & vowel.indexOf(word.charAt(i)) > -1){
+				newV = false;
+				count ++;
+			} else if (!newV & vowel.indexOf(word.charAt(i)) == -1){
+				newV = true;
+			}
+		}
+		return count;
+	}
+	
 	
 	/** A method for testing
 	 * 
