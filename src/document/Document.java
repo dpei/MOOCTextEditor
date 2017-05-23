@@ -68,39 +68,55 @@ public abstract class Document {
 	 *       is not considered a syllable unless the word has no other syllables. 
 	 *       You should consider y a vowel.
 	 */
+	
+	// This function was used to generate the number of Syllables based on the 
+	// number returned from countVowel()
 	protected int countSyllables(String word)
 	{
 		// TODO: Implement this method so that you can call it from the 
 	    // getNumSyllables method in BasicDocument (module 2) and 
 	    // EfficientDocument (module 3).
-		/*int count = 0; 
-		if ( lone 'e' is at the end ){
-			if (the word has no other syllables.){
-				count = 1;
-			} else {
-				count = countVowel()-1;
-			}
+		int count = 0; 
+		int vowelCount = countVowel(word);
+		String vowel = "aoeiuy";
+
+		// When only one letter is a word 
+		if (word.length() == 1){
+			count = vowelCount;	
+		
+		// The word contains more than one letter
 		} else {
-		*/
-			int count = countVowel(word);
-		//}
-		
-		
-	    return count;
+			// In the situation that a word only has the last letter is 'e' and no more
+			// other vowels 
+			if (vowel.indexOf(word.charAt(word.length()-2)) == -1
+				    // TODO: change into char
+					& word.charAt(word.length()-1) == 'e' 
+					& vowelCount > 1){
+				count = vowelCount -1;
+			} else {
+				count = vowelCount;				
+			}
+		}
+		return count;
 	}
 	
-	// Not sure why countVowel() should be implemented in the abstract class
+	// Not sure why this method should be implemented in the abstract class
+	// This method was used to count continuous vowels. 
 	protected int countVowel(String word){
 		int count = 0;
 		String vowel = "aoeiuy";
+		String lowWord = word.toLowerCase();
 		// store the state of vowel letter string
 		boolean newV = true;
 		for (int i = 0; i < word.length(); i++){
+			
 			//Each contiguous sequence of one or more vowels is a syllable, 
-			if (newV & vowel.indexOf(word.charAt(i)) > -1){
+			if (newV & vowel.indexOf(lowWord.charAt(i)) > -1){
 				newV = false;
 				count ++;
-			} else if (!newV & vowel.indexOf(word.charAt(i)) == -1){
+			
+			// change the state if newV from false to true when there is a non-vowel 	
+			} else if (!newV & vowel.indexOf(lowWord.charAt(i)) == -1){
 				newV = true;
 			}
 		}
@@ -129,6 +145,8 @@ public abstract class Document {
 					+ ", expected " + syllables);
 			passed = false;
 		}
+		doc.getNumSyllables();
+		
 		if (wordsFound != words) {
 			System.out.println("\nIncorrect number of words.  Found " + wordsFound 
 					+ ", expected " + words);

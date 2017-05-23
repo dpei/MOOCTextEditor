@@ -86,9 +86,12 @@ public class BasicDocument extends Document
 		// the helper function countSyllables in Document.java using a loop, 
 		// and then call it here on each word.
         List<String> token = getTokens("[A-Z*a-z*]+");
-		System.out.
-		
-		//return words.length;
+		int count = 0;
+        for (int i=0; i<token.size(); i++){
+        	int wordSyllables = countSyllables(token.get(i));
+        	count = count + wordSyllables;
+        }
+        return count;
 	}
 	
 	
@@ -102,12 +105,6 @@ public class BasicDocument extends Document
 		 * in the string, respectively.  You can use these examples to help clarify 
 		 * your understanding of how to count syllables, words, and sentences.
 		 */
-		testCase(new BasicDocument("Thiesef zhida"),
-				5, 2, 1);
-		
-		
-		
-		// below are original test cases
 		testCase(new BasicDocument("This is a test.  How many???  "
 		        + "Senteeeeeeeeeences are here... there should be 5!  Right?"),
 				16, 13, 5);
