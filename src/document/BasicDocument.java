@@ -40,7 +40,7 @@ public class BasicDocument extends Document
 		List<String> token = getTokens("[A-Z*a-z*]+");
 		return token.size();
 	}
-	 
+	
 	/**
 	 * Get the number of sentences in the document.
 	 * Sentences are defined as contiguous strings of characters ending in an 
