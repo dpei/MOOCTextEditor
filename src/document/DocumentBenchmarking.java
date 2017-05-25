@@ -25,15 +25,15 @@ public class DocumentBenchmarking {
 		
 	    // The amount of characters to increment each step
 	    // You can play around with this
-		int increment = 5000;
+		int increment = 50000;
 
 		// The number of steps to run.  
 		// You can play around with this.
-		int numSteps = 3;
+		int numSteps = 8;
 		
 		// THe number of characters to start with. 
 		// You can play around with this.
-		int start = 5000;
+		int start = 50000;
 		
 		// TODO: Fill in the rest of this method so that it runs two loops
 		// and prints out timing results as described in the assignment 
@@ -57,19 +57,25 @@ public class DocumentBenchmarking {
 			//      b. Calls fleshScore on this document
 		    //  4. Print out the time it took to complete the loop in step 3 
       		//      (on the same line as the first print statement) followed by a tab (\t)
-			BasicDocument basic = new BasicDocument(chars);
-			int timeBasic = System.nanotime(basic.getFleschScore());
-			System.out.print(timeBasic+"\t");
+			long timeBasicStart = System.nanoTime()/10^9;
+			for (int i=0; i<trials; i++){
+				BasicDocument basic = new BasicDocument(chars);
+				basic.getFleschScore();
+			}
+			long timeBasicEnd = System.nanoTime()/10^9;
+			System.out.print((timeBasicEnd-timeBasicStart)+"\t");
 			
-			
-			
+
 			//  5. Time a loop that runs trials times (trials is the variable above) that:
 			//      a. Creates an EfficientDocument 
 			//      b. Calls fleshScore on this document
-			EfficientDocument efficient = new EfficientDocument(chars);
-			int timeEfficient = System.nanotime(efficient.getFleschScore());
-			System.out.print(timeEfficient+"\t");
-			
+			long timeEfficientStart = System.nanoTime()/10^9;
+			for (int i=0; i<trials; i++){
+				EfficientDocument efficient = new EfficientDocument(chars);
+				efficient.getFleschScore();
+			}
+			long timeEfficientEnd = System.nanoTime()/10^9;
+			System.out.print((timeEfficientEnd-timeEfficientStart)+"\t");
 			
 			
 			//  6. Print out the time it took to complete the loop in step 5 
