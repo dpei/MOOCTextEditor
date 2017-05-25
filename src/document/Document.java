@@ -100,7 +100,7 @@ public abstract class Document {
 		return count;
 	}
 	
-	// Not sure why this method should be implemented in the abstract class
+	// countVowel() method is used here because EfficientDocument.java needs it.
 	// This method was used to count continuous vowels. 
 	protected int countVowel(String word){
 		int count = 0;
