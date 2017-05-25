@@ -188,17 +188,15 @@ public abstract class Document {
 	{
 	    // TODO: You will play with this method in week 1, and 
 		// then implement it in week 2
-	    //double FleshScore = 206.835 - (1.015*(getNumWords()/getNumSentences())) - 
-	    //		(84.6*(getNumSyllables()/getNumWords()));
-		//return FleshScore;
+	    double FleshScore = 206.835 - (1.015*((double)getNumWords()/(double)getNumSentences())) - 
+	    		(84.6*((double)getNumSyllables()/(double)getNumWords()));
+		return FleshScore;
 		
-		double wordCount = (double)getNumWords();
-		
-		return wordCount;
+		//double wordCount = (double)getNumWords();
 		
 		//return 206.835 - (1.015 * ((wordCount)/getNumSentences())) 
-			//	- (84.6 * (((double)getNumSyllables())/wordCount));
+				//- (84.6 * (((double)getNumSyllables())/wordCount));
 	
-		//return 5;
+		
 	}
 }
