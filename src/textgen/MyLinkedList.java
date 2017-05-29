@@ -16,27 +16,51 @@ public class MyLinkedList<E> extends AbstractList<E> {
 	LLNode<E> tail;
 	int size;
 
-	/** Create a new empty LinkedList */
-	public MyLinkedList() {
-		// TODO: Implement this method
+	/** Create a new empty LinkedList, head node and tail node does not have values */
+	public MyLinkedList() {			
+		head = new LLNode<E>();
+		tail = new LLNode<E>();
+		size = 0;
+		// head.prev=null, tail.next=null
+		head.next = tail;
+		tail.prev = head;
 	}
 
 	/**
 	 * Appends an element to the end of the list
 	 * @param element The element to add
 	 */
-	public boolean add(E element ) 
+	public boolean add(E element) 
 	{
-		// TODO: Implement this method
-		return false;
+		if (element == null){
+			throw new NullPointerException("invalid input");
+		} else {
+			// change next and prev in neighborhood nodes.
+			LLNode<E> node = new LLNode<E>(element);
+			node.next = tail;
+			node.prev = tail.prev;
+			tail.prev = node;
+			node.prev.next = node;
+			size++;
+			return true;
+		}
 	}
 
 	/** Get the element at position index 
 	 * @throws IndexOutOfBoundsException if the index is out of bounds. */
 	public E get(int index) 
 	{
-		// TODO: Implement this method.
-		return null;
+		if (index > size-1 || index < 0){
+			throw new IndexOutOfBoundsException("invalid index number!");
+		} else {
+			LLNode<E> node = head;
+			for (int i=0; i<=index; i++){
+				node = node.next;
+			}
+			
+			// extract data from the chosen node
+			return node.data;
+		}
 	}
 
 	/**
@@ -46,7 +70,20 @@ public class MyLinkedList<E> extends AbstractList<E> {
 	 */
 	public void add(int index, E element ) 
 	{
-		// TODO: Implement this method
+		/*
+		LLNode<E> node = new LLNode<E>(element);
+		
+		if (size == 0){
+			LLNode<E> nextNode = tail;
+		} else {
+			LLNode<E> nextNode = this.get(index);
+		}
+		
+		
+		
+		node.next =
+		*/
+		
 	}
 
 
@@ -54,7 +91,7 @@ public class MyLinkedList<E> extends AbstractList<E> {
 	public int size() 
 	{
 		// TODO: Implement this method
-		return -1;
+		return size;
 	}
 
 	/** Remove a node at the specified index and return its data element.
@@ -89,9 +126,16 @@ class LLNode<E>
 	LLNode<E> next;
 	E data;
 
-	// TODO: Add any other methods you think are useful here
-	// E.g. you might want to add another constructor
-
+	// This constructor is useful for initiate head 
+	// and tail node
+	public LLNode() 
+	{
+		this.data = null;
+		this.prev = null;
+		this.next = null;
+	}
+	
+	
 	public LLNode(E e) 
 	{
 		this.data = e;

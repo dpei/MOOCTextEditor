@@ -53,6 +53,35 @@ public class MyLinkedListTester {
 	/*You should not need to add much to this method.
 	 * We provide it as an example of a thorough test. */
 	@Test
+	public void testGet2()
+	{
+		//test empty list, get should throw an IndexOutOfBound exception
+		try {
+			emptyList.get(0);
+			fail("Check out of bounds");
+		}
+		catch (IndexOutOfBoundsException e) {
+		}
+		
+		try {
+			shortList.get(-1);
+			fail("Check out of bounds");
+		}
+		catch (IndexOutOfBoundsException e) {
+		
+		}
+
+
+		assertEquals("Check first", "A", shortList.get(0));
+		assertEquals("Check second", "B", shortList.get(1));
+		
+		
+		
+	}
+	
+	
+	
+	@Test
 	public void testGet()
 	{
 		//test empty list, get should throw an exception
@@ -125,8 +154,27 @@ public class MyLinkedListTester {
 	@Test
 	public void testAddEnd()
 	{
-        // TODO: implement this test
 		
+		// add null return exception
+		try {
+			emptyList.add(null);
+			fail("Check add null value");
+		}
+		catch (NullPointerException e) {
+			
+		}
+		
+		// regular cases
+		boolean addShort = shortList.add("C");
+		assertEquals("Check add more", true, addShort);
+		assertEquals("Check add more", "C", shortList.get(2));
+		assertEquals("Check add more", 3, shortList.size());
+		
+		// add into a empty list
+		boolean addEmpty = emptyList.add(2);
+		assertEquals("Check add more", true, addEmpty);
+		assertEquals("Check add more", (Integer)2, emptyList.get(0));
+		assertEquals("Check add more", 1, emptyList.size());
 	}
 
 	
@@ -146,7 +194,40 @@ public class MyLinkedListTester {
 	@Test
 	public void testAddAtIndex()
 	{
-        // TODO: implement this test
+		// add a null
+		try {
+			shortList.add(1, null);
+			fail("Check add null value");
+		}
+		catch (NullPointerException e) {
+			
+		}
+		
+		// add out of bond
+		try {
+			shortList.add(6, null);
+			fail("Check add out of bond");
+		}
+		catch (IndexOutOfBoundsException e) {
+			
+		}
+		
+		// add next to head
+		shortList.add(0, "C");
+		assertEquals("Check add more", "C", shortList.get(0));
+		assertEquals("Check add more", 3, shortList.size());
+		
+		// add next to tail
+		shortList.add(2, "D");
+		assertEquals("Check add more", "D", shortList.get(2));
+		assertEquals("Check add more", 4, shortList.size());
+
+		
+		// add in the middle
+		shortList.add(1, "E");
+		assertEquals("Check add more", "C", shortList.get(0));
+		assertEquals("Check add more", 5 shortList.size());
+
 		
 	}
 	
