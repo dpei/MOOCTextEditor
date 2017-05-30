@@ -53,35 +53,6 @@ public class MyLinkedListTester {
 	/*You should not need to add much to this method.
 	 * We provide it as an example of a thorough test. */
 	@Test
-	public void testGet2()
-	{
-		//test empty list, get should throw an IndexOutOfBound exception
-		try {
-			emptyList.get(0);
-			fail("Check out of bounds");
-		}
-		catch (IndexOutOfBoundsException e) {
-		}
-		
-		try {
-			shortList.get(-1);
-			fail("Check out of bounds");
-		}
-		catch (IndexOutOfBoundsException e) {
-		
-		}
-
-
-		assertEquals("Check first", "A", shortList.get(0));
-		assertEquals("Check second", "B", shortList.get(1));
-		
-		
-		
-	}
-	
-	
-	
-	@Test
 	public void testGet()
 	{
 		//test empty list, get should throw an exception
@@ -145,7 +116,6 @@ public class MyLinkedListTester {
 		assertEquals("Remove: check element 0 is correct ", (Integer)21, list1.get(0));
 		assertEquals("Remove: check size is correct ", 2, list1.size());
 		
-		// TODO: Add more tests here
 	}
 	
 	/** Test adding an element into the end of the list, specifically
@@ -182,7 +152,11 @@ public class MyLinkedListTester {
 	@Test
 	public void testSize()
 	{
-		// TODO: implement this test
+		assertEquals("Check size method", 2, shortList.size());
+		assertEquals("Check size method", 0, emptyList.size());
+		assertEquals("Check size method", 3, list1.size());
+		assertEquals("Check size method", 3, list1.size());
+		assertEquals("Check size method", 10, longerList.size());
 	}
 
 	
@@ -194,7 +168,7 @@ public class MyLinkedListTester {
 	@Test
 	public void testAddAtIndex()
 	{
-		// add a null
+		// add node with a null as value
 		try {
 			shortList.add(1, null);
 			fail("Check add null value");
@@ -203,7 +177,7 @@ public class MyLinkedListTester {
 			
 		}
 		
-		// add out of bond
+		// add a node out of bond index 
 		try {
 			shortList.add(6, null);
 			fail("Check add out of bond");
@@ -226,7 +200,7 @@ public class MyLinkedListTester {
 		// add in the middle
 		shortList.add(1, "E");
 		assertEquals("Check add more", "C", shortList.get(0));
-		assertEquals("Check add more", 5 shortList.size());
+		assertEquals("Check add more", 5, shortList.size());
 
 		
 	}
@@ -235,11 +209,28 @@ public class MyLinkedListTester {
 	@Test
 	public void testSet()
 	{
-	    // TODO: implement this test
+		try {
+			shortList.set(1, null);
+			fail("Check add null value");
+		}
+		catch (NullPointerException e) {
+			
+		}
+		
+		// add a node out of bond index 
+		try {
+			shortList.set(6, "V");
+			fail("Check add out of bond");
+		}
+		catch (IndexOutOfBoundsException e) {
+			
+		}
+		
+		// add next to head
+		shortList.set(0, "C");
+		assertEquals("Check set method", "C", shortList.get(0));
+		assertEquals("Check set method", "B", shortList.get(1));
+		assertEquals("Check set method", 2, shortList.size());
 	    
 	}
-	
-	
-	// TODO: Optionally add more test methods.
-	
 }

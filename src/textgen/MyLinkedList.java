@@ -70,27 +70,34 @@ public class MyLinkedList<E> extends AbstractList<E> {
 	 */
 	public void add(int index, E element ) 
 	{
-		/*
-		LLNode<E> node = new LLNode<E>(element);
 		
-		if (size == 0){
-			LLNode<E> nextNode = tail;
+		if (index > size-1){
+			throw new IndexOutOfBoundsException("invalid index number!");
+		} else if (element == null){
+			throw new NullPointerException("invalid input");
 		} else {
-			LLNode<E> nextNode = this.get(index);
+			LLNode<E> node = new LLNode<E>(element);
+			
+			// based on index, find the nextNode to be inserted 
+			LLNode<E> nextNode = head;
+			for (int i=0; i<=index; i++){
+				nextNode = nextNode.next;
+			}
+			
+			// update next and prev in each node
+			node.next = nextNode;
+			node.prev = nextNode.prev;
+			nextNode.prev = node;
+			node.prev.next = node;
+			size++;
+			
 		}
-		
-		
-		
-		node.next =
-		*/
-		
 	}
 
 
 	/** Return the size of the list */
 	public int size() 
 	{
-		// TODO: Implement this method
 		return size;
 	}
 
@@ -102,8 +109,27 @@ public class MyLinkedList<E> extends AbstractList<E> {
 	 */
 	public E remove(int index) 
 	{
-		// TODO: Implement this method
-		return null;
+		if (index > size-1){
+			throw new IndexOutOfBoundsException("invalid index number!");
+		} else {
+			LLNode<E> node = head;
+			for (int i=0; i<=index; i++){
+				node = node.next;
+			}
+			
+			// extract data from the chosen node
+			E removedData = node.data;
+			
+			// update prev and next in neighbourhood nodes
+			node.next.prev = node.prev;
+			node.prev.next = node.next;
+			size = size - 1;
+			
+			return removedData;
+		}
+		
+		
+		
 	}
 
 	/**
@@ -115,8 +141,23 @@ public class MyLinkedList<E> extends AbstractList<E> {
 	 */
 	public E set(int index, E element) 
 	{
-		// TODO: Implement this method
-		return null;
+		if (index > size-1){
+			throw new IndexOutOfBoundsException("invalid index number!");
+		} else if (element == null){
+			throw new NullPointerException("invalid input");
+		} else {
+			
+			LLNode<E> node = head;
+			for (int i=0; i<=index; i++){
+				node = node.next;
+			}
+			
+			// extract data from the chosen node
+			E replaceData = node.data;
+			node.data = element;
+			return replaceData;
+		}
+		
 	}   
 }
 
