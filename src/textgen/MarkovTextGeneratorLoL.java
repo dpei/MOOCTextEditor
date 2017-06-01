@@ -7,7 +7,9 @@ import java.util.Random;
 
 /** 
  * An implementation of the MTG interface that uses a list of lists.
- * @author UC San Diego Intermediate Programming MOOC team 
+ * @author UC San Diego Intermediate Programming MOOC team
+ * @modified by Dong Pei
+ * @modified on May. 2017 
  */
 public class MarkovTextGeneratorLoL implements MarkovTextGenerator {
 
@@ -32,8 +34,33 @@ public class MarkovTextGeneratorLoL implements MarkovTextGenerator {
 	@Override
 	public void train(String sourceText)
 	{
-		// TODO: Implement this method
+		String[] sourceWords = sourceText.split(" ");
+		String prevWord = starter;
+		String starter = sourceWords[0];
+		for (int i=0; i<sourceWords.length; i++){
+			String word = sourceWords[i];
+			if (inList(word)){
+				
+			} else {
+				ListNode node = new ListNode(word);
+				wordList.add(node);
+				node.addNextWord(word);
+			}
+			prevWord = word;
+		}
+		starter is the next sourceText[length()-1];
 	}
+	
+	
+	public boolean inList(String word){
+		for (ListNode node : wordList){
+			if (node.getWord() == word){
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	
 	/** 
 	 * Generate the number of words requested.
