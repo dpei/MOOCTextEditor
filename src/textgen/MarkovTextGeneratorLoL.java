@@ -35,31 +35,39 @@ public class MarkovTextGeneratorLoL implements MarkovTextGenerator {
 	public void train(String sourceText)
 	{
 		String[] sourceWords = sourceText.split(" ");
-		String prevWord = starter;
 		String starter = sourceWords[0];
-		for (int i=0; i<sourceWords.length; i++){
-			String word = sourceWords[i];
-			if (inList(word)){
-				
-			} else {
-				ListNode node = new ListNode(word);
-				wordList.add(node);
-				node.addNextWord(word);
+		String prevWord = starter;
+		
+		for (int i=1; i<sourceWords.length; i++){
+			
+			for (ListNode node : wordList){
+				if (node.getWord() == prevWord){
+					node.addNextWord(sourceWords[i]);
+				} else {
+					ListNode newNode = new ListNode(prevWord);
+					wordList.add(newNode);
+					newNode.addNextWord(sourceWords[i]);
+				}
 			}
-			prevWord = word;
+			prevWord = sourceWords[i];
 		}
-		starter is the next sourceText[length()-1];
-	}
-	
-	
-	public boolean inList(String word){
+		
+		// add start word as the next word for the last word
+		String lastWord = sourceWords[sourceWords.length-1];
 		for (ListNode node : wordList){
-			if (node.getWord() == word){
-				return true;
+			if (node.getWord() == lastWord){
+				node.addNextWord(starter);
+			} else {
+				ListNode newNode = new ListNode(lastWord);
+				wordList.add(newNode);
+				newNode.addNextWord(starter);
 			}
 		}
-		return false;
+		
 	}
+	
+	
+
 	
 	
 	/** 
@@ -74,14 +82,19 @@ public class MarkovTextGeneratorLoL implements MarkovTextGenerator {
 	
 	// Can be helpful for debugging
 	@Override
+	
 	public String toString()
 	{
+		/*
 		String toReturn = "";
 		for (ListNode n : wordList)
 		{
 			toReturn += n.toString();
 		}
 		return toReturn;
+		*/
+		
+		return "length is"+wordList.size();
 	}
 	
 	/** Retrain the generator from scratch on the source text */
@@ -103,6 +116,13 @@ public class MarkovTextGeneratorLoL implements MarkovTextGenerator {
 	{
 		// feed the generator a fixed random value for repeatable behavior
 		MarkovTextGeneratorLoL gen = new MarkovTextGeneratorLoL(new Random(42));
+		String text = "hi there hi leo";
+		System.out.println(text);
+		gen.train(text);
+		
+		System.out.println(gen.toString());
+		
+		
 		String textString = "Hello.  Hello there.  This is a test.  Hello there.  Hello Bob.  Test again.";
 		System.out.println(textString);
 		gen.train(textString);
