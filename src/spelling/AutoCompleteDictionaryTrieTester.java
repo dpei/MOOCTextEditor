@@ -13,6 +13,8 @@ import org.junit.Test;
 
 /**
  * @author UC San Diego MOOC team
+ * @modified Dong Pei
+ * @modified on June 2017
  *
  */
 public class AutoCompleteDictionaryTrieTester {

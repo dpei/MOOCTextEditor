@@ -8,7 +8,9 @@ import java.util.LinkedList;
 
 /** 
  * An trie data structure that implements the Dictionary and the AutoComplete ADT
- * @author You
+ * @author UCSD MOOC team
+ * @modified by Dong Pei
+ * @modified on June 2017
  *
  */
 public class AutoCompleteDictionaryTrie implements  Dictionary, AutoComplete {
@@ -39,7 +41,13 @@ public class AutoCompleteDictionaryTrie implements  Dictionary, AutoComplete {
 	 */
 	public boolean addWord(String word)
 	{
-	    //TODO: Implement this method.
+	    String lowerWord = word.toLowerCase();
+	    if (isWord(lowerWord)){
+    		return false;
+    	} else {
+    		root.add(lowerWord);
+            return true;
+    	}
 	    return false;
 	}
 	
@@ -49,8 +57,8 @@ public class AutoCompleteDictionaryTrie implements  Dictionary, AutoComplete {
 	 */
 	public int size()
 	{
-	    //TODO: Implement this method
-	    return 0;
+	    return root.size()
+	    
 	}
 	
 	
@@ -59,7 +67,7 @@ public class AutoCompleteDictionaryTrie implements  Dictionary, AutoComplete {
 	@Override
 	public boolean isWord(String s) 
 	{
-	    // TODO: Implement this method
+	    
 		return false;
 	}
 
