@@ -4,6 +4,8 @@ import java.util.LinkedList;
 
 /**
  * A class that implements the Dictionary interface using a LinkedList
+ * @modified by Dong Pei
+ * @modified on June 2017
  *
  */
 public class DictionaryLL implements Dictionary 
@@ -12,7 +14,7 @@ public class DictionaryLL implements Dictionary
 	private LinkedList<String> dict;
 	
     // TODO: Add a constructor
-
+	
 
     /** Add this word to the dictionary.  Convert it to lowercase first
      * for the assignment requirements.
@@ -20,8 +22,9 @@ public class DictionaryLL implements Dictionary
      * @return true if the word was added to the dictionary 
      * (it wasn't already there). */
     public boolean addWord(String word) {
-    	// TODO: Implement this method
-        return false;
+    	String lowerWord = word.toLowerCase();
+    	
+        return true;
     }
 
 
