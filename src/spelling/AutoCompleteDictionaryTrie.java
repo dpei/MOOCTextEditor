@@ -41,14 +41,31 @@ public class AutoCompleteDictionaryTrie implements  Dictionary, AutoComplete {
 	 */
 	public boolean addWord(String word)
 	{
-	    String lowerWord = word.toLowerCase();
-	    if (isWord(lowerWord)){
+	    
+		String lowerWord = word.toLowerCase();
+	    
+	    TrieNode node = root;
+	    
+	    // add char if no char exists in previous node
+	    for (int i=0; i<lowerWord.length(); i++){
+	    	char c = lowerWord.charAt(i);
+	    	if (node.getValidNextCharacters().contains(c)){
+	    		node = node.getChild(c);
+	    	} else {
+	    		node = node.insert(c);
+	    	}
+	    }
+	    
+	    // test if this word is a old word or not.
+    	if(node.endsWord()){
     		return false;
     	} else {
-    		root.add(lowerWord);
-            return true;
+    		node.setEndsWord(true);
+    		size++;
+    		return true;
     	}
-	    return false;
+		
+	    
 	}
 	
 	/** 
@@ -57,8 +74,7 @@ public class AutoCompleteDictionaryTrie implements  Dictionary, AutoComplete {
 	 */
 	public int size()
 	{
-	    return root.size()
-	    
+		return size;   
 	}
 	
 	
@@ -67,8 +83,24 @@ public class AutoCompleteDictionaryTrie implements  Dictionary, AutoComplete {
 	@Override
 	public boolean isWord(String s) 
 	{
-	    
-		return false;
+		String lowerS = s.toLowerCase();
+	    TrieNode node = root;
+		
+		for (int i=0; i<lowerS.length(); i++){
+	    	char c = lowerS.charAt(i);
+	    	if (node.getValidNextCharacters().contains(c)){
+	    		node = node.getChild(c);
+	    	} else {
+	    		return false;
+	    	}
+		}
+		
+		// determine the last node
+		if(node.endsWord()){
+    		return true;
+		} else {
+			return false;
+		}
 	}
 
 	/** 
@@ -133,6 +165,5 @@ public class AutoCompleteDictionaryTrie implements  Dictionary, AutoComplete {
  		}
  	}
  	
-
 	
 }

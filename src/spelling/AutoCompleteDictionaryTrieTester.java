@@ -34,10 +34,12 @@ public class AutoCompleteDictionaryTrieTester {
 		emptyDict = new AutoCompleteDictionaryTrie();
 		smallDict = new AutoCompleteDictionaryTrie();
 		largeDict = new AutoCompleteDictionaryTrie();
-
+		
 		smallDict.addWord("Hello");
 		smallDict.addWord("HElLo");
+		
 		smallDict.addWord("help");
+		
 		smallDict.addWord("he");
 		smallDict.addWord("hem");
 		smallDict.addWord("hot");
@@ -51,6 +53,7 @@ public class AutoCompleteDictionaryTrieTester {
 	
 	/** Test if the size method is working correctly.
 	 */
+	
 	@Test
 	public void testSize()
 	{
