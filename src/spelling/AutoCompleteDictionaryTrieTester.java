@@ -135,6 +135,14 @@ public class AutoCompleteDictionaryTrieTester {
 	}
 	
 	@Test
+	public void testPredictCompletions2()
+	{
+		List<String> completions;
+		completions = smallDict.predictCompletions("herwuia", 0);
+		assertEquals(0, completions.size());
+	}
+	
+	@Test
 	public void testPredictCompletions()
 	{
 		List<String> completions;

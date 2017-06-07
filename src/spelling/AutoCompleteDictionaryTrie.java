@@ -2,6 +2,7 @@ package spelling;
 
 import java.util.List;
 import java.util.Set;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -126,10 +127,22 @@ public class AutoCompleteDictionaryTrie implements  Dictionary, AutoComplete {
      */@Override
      public List<String> predictCompletions(String prefix, int numCompletions) 
      {
-    	 // TODO: Implement this method
     	 // This method should implement the following algorithm:
     	 // 1. Find the stem in the trie.  If the stem does not appear in the trie, return an
     	 //    empty list
+    	 String lowerPrefix = prefix.toLowerCase();
+ 	     TrieNode node = root;
+ 	     
+ 		 for (int i=0; i<lowerPrefix.length(); i++){
+ 			 char c = lowerPrefix.charAt(i);
+ 			 if (node.getValidNextCharacters().contains(c)){
+ 				 node = node.getChild(c);
+ 			 } else {
+ 				 List<String> list = new ArrayList<String>();
+ 				 return list;
+ 			 }
+ 		 }
+ 		 
     	 // 2. Once the stem is found, perform a breadth first search to generate completions
     	 //    using the following algorithm:
     	 //    Create a queue (LinkedList) and add the node that completes the stem to the back
