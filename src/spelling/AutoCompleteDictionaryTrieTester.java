@@ -37,9 +37,7 @@ public class AutoCompleteDictionaryTrieTester {
 		
 		smallDict.addWord("Hello");
 		smallDict.addWord("HElLo");
-		
 		smallDict.addWord("help");
-		
 		smallDict.addWord("he");
 		smallDict.addWord("hem");
 		smallDict.addWord("hot");
@@ -132,14 +130,6 @@ public class AutoCompleteDictionaryTrieTester {
 		assertEquals("Testing isWord on large: subsequent", true, largeDict.isWord("subsequent"));
 		
 		
-	}
-	
-	@Test
-	public void testPredictCompletions2()
-	{
-		List<String> completions;
-		completions = smallDict.predictCompletions("herwuia", 0);
-		assertEquals(0, completions.size());
 	}
 	
 	@Test

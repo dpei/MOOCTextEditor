@@ -1,6 +1,7 @@
 package spelling;
 
 import java.util.List;
+import java.util.Queue;
 import java.util.Set;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -127,34 +128,49 @@ public class AutoCompleteDictionaryTrie implements  Dictionary, AutoComplete {
      */@Override
      public List<String> predictCompletions(String prefix, int numCompletions) 
      {
-    	 // This method should implement the following algorithm:
-    	 // 1. Find the stem in the trie.  If the stem does not appear in the trie, return an
-    	 //    empty list
     	 String lowerPrefix = prefix.toLowerCase();
  	     TrieNode node = root;
- 	     
+    	 
+ 	     // This method should implement the following algorithm:
+    	 // 1. Find the stem in the trie.  If the stem does not appear in the trie, return an
+    	 //    empty list
  		 for (int i=0; i<lowerPrefix.length(); i++){
  			 char c = lowerPrefix.charAt(i);
  			 if (node.getValidNextCharacters().contains(c)){
  				 node = node.getChild(c);
  			 } else {
- 				 List<String> list = new ArrayList<String>();
- 				 return list;
+ 				 return new ArrayList<String>();
  			 }
  		 }
  		 
-    	 // 2. Once the stem is found, perform a breadth first search to generate completions
+ 		 // 2. Once the stem is found, perform a breadth first search to generate completions
     	 //    using the following algorithm:
     	 //    Create a queue (LinkedList) and add the node that completes the stem to the back
-    	 //       of the list.
-    	 //    Create a list of completions to return (initially empty)
+    	 //       of the list. 
+ 		 // 	    Create a list of completions to return (initially empty)
+ 		 Queue<TrieNode> list = new LinkedList<TrieNode>();
+ 		 LinkedList<String> completions = new LinkedList<String>();
+ 		 list.add(node);
+
     	 //    While the queue is not empty and you don't have enough completions:
     	 //       remove the first Node from the queue
     	 //       If it is a word, add it to the completions list
     	 //       Add all of its child nodes to the back of the queue
     	 // Return the list of completions
-    	 
-         return null;
+ 		 while(!list.isEmpty() && completions.size()< numCompletions){
+ 			 TrieNode curr = list.remove();
+ 			 if(curr != null){
+ 				 if (curr.endsWord()){
+ 					completions.add(curr.getText());
+ 				 }
+ 				 for (char c : curr.getValidNextCharacters()){
+ 					 list.add(curr.getChild(c));
+ 				 }
+ 			 }
+ 		 }
+ 		 
+ 		 
+ 		 return completions;
      }
 
  	// For debugging
