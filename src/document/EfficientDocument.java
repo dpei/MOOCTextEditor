@@ -8,6 +8,7 @@ import java.util.List;
  * and sentences and then stores those values.
  * 
  * @author UC San Diego Intermediate Programming MOOC team
+ * @modified by Dong Pei
  */
 public class EfficientDocument extends Document {
 
